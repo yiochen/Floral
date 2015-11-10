@@ -35,26 +35,45 @@ Arrow.prototype.sprout = function (dd, inc) {
     return new Arrow(this.getVector(), this.d, dd, inc);
 };
 var CONST = {
-    sprout_chance: 0.02,
+    sprout_chance: 0.03,
+    max_counter: 1000,
 };
 //----------------------------------------------------------//
-var initVel = new Point(10, 10);
-initVel.angle = Math.random() * 360;
-var a = new Arrow(initVel, 1, 0.1, false);
-var pos = view.center;
-var path = new Path();
-path.strokeColor = "white";
-path.add(pos);
-var counter = 0;
-var maxCounter = 1000;
-var heads = [{
-    pos: pos,
-    path: path,
-    arrow: a,
-}];
+var initVel, a, pos, path, counter, heads;
+
+
+function init() {
+
+    initVel = new Point(10, 10);
+    initVel.angle = Math.random() * 360;
+    a = new Arrow(initVel, 1, 0.1, false);
+
+    pos = view.center;
+
+    path = new Path();
+
+    path.strokeColor = "white";
+    path.add(pos);
+    counter = 0;
+
+    heads = [];
+
+    heads.push({
+        pos: pos,
+        path: path,
+        arrow: a,
+    });
+
+}
+
+function clean() {
+    path = null;
+    heads = null;
+    project.activeLayer.removeChildren();
+}
 
 function onFrame(event) {
-    if (counter < maxCounter) {
+    if (counter != null && counter < CONST.max_counter) {
         heads.forEach(function (elem, index) {
             var a = elem.arrow;
             var pos = elem.pos;
@@ -78,4 +97,9 @@ function onFrame(event) {
         });
         counter++;
     }
+}
+
+function onMouseDown(event) {
+    clean();
+    init();
 }
