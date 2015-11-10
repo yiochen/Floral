@@ -2,7 +2,9 @@
 <html>
 
 <head>
-    <script src="https://cdn.firebase.com/js/client/2.2.6/firebase.js"></script>
+    <title>FlORAL</title>
+    <link rel="shortcut icon" type="image/png" href="http://yiou.me/common/favicon/favicon.png" />
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <!-- Load the Paper.js library -->
     <script type="text/javascript" src="js/paper-full.js"></script>
     <!-- Define inlined PaperScript associate it with myCanvas -->
@@ -19,14 +21,25 @@
         
         canvas {
             float: left;
-            position: relative;
+            position: absolute;
             height: 100%;
             width: 100%;
+        }
+        
+        #title {
+            z-index: 10;
+            float: left;
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            font-family: 'Lobster', cursive;
+            font-size: 40px;
         }
     </style>
 </head>
 
 <body>
+    <div id="title">Floral</div>
     <canvas id="myCanvas" keepalive="true"></canvas>
 </body>
 
